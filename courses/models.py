@@ -5,7 +5,7 @@ import uuid
 class COURSE_STATUS(models.TextChoices):
     NOT_STARTED = 'not started'
     IN_PROGRESS = 'in progress'
-    FINISHED = ' finished'
+    FINISHED = 'finished'
 
 
 class Course(models.Model):
@@ -21,7 +21,7 @@ class Course(models.Model):
     instructor_id = models.ForeignKey(
         'accounts.Account',
         on_delete=models.CASCADE,
-        related_name='courses'
+        related_name='courses',
     )
     students = models.ManyToManyField(
         'accounts.Account',

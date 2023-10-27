@@ -9,7 +9,7 @@ class STUDENT_COURSE_STATUS(models.TextChoices):
 
 class StudentCourse(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    state = models.CharField(
+    status = models.CharField(
         max_length=20,
         choices=STUDENT_COURSE_STATUS.choices,
         default=STUDENT_COURSE_STATUS.PENDING
