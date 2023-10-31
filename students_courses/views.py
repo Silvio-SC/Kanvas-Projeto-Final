@@ -1,19 +1,16 @@
-from django.forms import model_to_dict
 from rest_framework.views import APIView, Response, Request, status
 from courses.models import Course
 from accounts.models import Account
-from .models import StudentCourse
 from courses.serializers import StudentCourseReturnAllSerializer
-from .serializers import (
-    StudentCourseSerializer,
-    StudentCourseReturnSerializer
-    )
+from .serializers import StudentCourseSerializer
 from django.shortcuts import get_object_or_404
 from courses.permissions import IsSuperUser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from drf_spectacular.utils import extend_schema
 
 
+@extend_schema(tags=['Students'])
 class StudentsView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsSuperUser]

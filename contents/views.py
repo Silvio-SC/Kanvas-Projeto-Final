@@ -5,10 +5,13 @@ from courses.models import Course
 from .serializers import ContentSerializer
 from django.shortcuts import get_object_or_404
 
+from drf_spectacular.utils import extend_schema
+
 from courses.permissions import IsAdminOrOwner, IsAdminOrGet
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
+@extend_schema(tags=['Contents'])
 class ContentView(CreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminOrGet]
@@ -26,6 +29,7 @@ class ContentView(CreateAPIView):
             serializer.save()
 
 
+@extend_schema(tags=['Content'])
 class ContentDetailView(RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminOrOwner]
@@ -46,8 +50,8 @@ class ContentDetailView(RetrieveUpdateDestroyAPIView):
             'id': self.kwargs["content_id"]
         }
         try:
-            course = Course.objects.get(pk=self.kwargs["course_id"])
-            content = Content.objects.get(pk=self.kwargs["content_id"])
+            Course.objects.get(pk=self.kwargs["course_id"])
+            Content.objects.get(pk=self.kwargs["content_id"])
             obj = get_object_or_404(queryset, **filter)
         except Course.DoesNotExist:
             return None
