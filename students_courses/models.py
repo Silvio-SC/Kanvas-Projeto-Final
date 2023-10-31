@@ -14,11 +14,13 @@ class StudentCourse(models.Model):
         choices=STUDENT_COURSE_STATUS.choices,
         default=STUDENT_COURSE_STATUS.PENDING
     )
-    course_id = models.ForeignKey(
+    course = models.ForeignKey(
         'courses.Course',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='students_courses'
     )
-    student_id = models.ForeignKey(
+    student = models.ForeignKey(
         'accounts.Account',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='students_courses'
     )

@@ -3,7 +3,6 @@ from .models import Content
 
 
 class ContentSerializer(serializers.ModelSerializer):
-    course = serializers.CharField()
 
     class Meta:
         model = Content
@@ -15,6 +14,5 @@ class ContentSerializer(serializers.ModelSerializer):
         ]
         extra_kwargs = {
             'video_url': {'allow_null': True},
-            'content': {'allow_blank': True, 'default': ''},
             'id': {'read_only': True},
         }
