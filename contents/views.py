@@ -29,7 +29,7 @@ class ContentView(CreateAPIView):
             serializer.save()
 
 
-@extend_schema(tags=['Content'])
+@extend_schema(tags=['Contents'])
 class ContentDetailView(RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminOrOwner]
